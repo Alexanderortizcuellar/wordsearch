@@ -1,0 +1,33 @@
+.container {
+	display:flex;
+
+}
+
+.right {
+	display:flex;
+
+}
+
+.right table {
+	border:2px solid  rgb(200,200,200);
+	border-radius: 10px;
+	text-align: center;
+	background-color:rgb(230,230,230);
+
+
+
+}
+
+
+
+td {
+	text-align: center;
+	padding: 4px 4px 4px 4px;
+	color:rgb(65,65, 65);
+	font-size: 19px;
+	font-weight:bold;
+	width:8px;
+	height:8px;
+
+}
+
