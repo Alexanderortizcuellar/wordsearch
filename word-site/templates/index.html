@@ -4,10 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="stylesheet" href="/static/style.css"  charset="utf-8">
-		<title>Index</title>
+		<title>Wordsearch generator</title>
 	</head>
 	<body>
 		<header>
+			<h1>Wordsearch generator</h1>
 			<nav>
 
 			</nav>
@@ -54,9 +55,23 @@
 			<div class="right">
 				{{ grid|safe  }}
 			</div>
+			<div>
+				<table>
+					<tr>
+						<td onclick="change(this)">alex</td>
+						<td onmouseenter="main()">juan</td>
+						<td onmouseenter="main()">pedro</td>
+						<td onmouseenter="main()"> pablo</td>
+					</tr>
+				</table>
+			</div>
 			
 		</div>
 		</div>
-		
+		<script>
+			function change(x) {
+				x.style.backgroundColor = "rgb(200,200,200)";
+			}
+		</script>
 	</body>
 </html>

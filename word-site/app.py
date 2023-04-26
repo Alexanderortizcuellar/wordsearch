@@ -6,8 +6,9 @@ from flask import Flask, redirect, render_template
 
 app = Flask(__name__)
 
-grid = [[choice(string.ascii_uppercase) for col in range(16)]
-        for row in range(16)]
+
+grid = [[choice(string.ascii_uppercase) for col in range(20)]
+        for row in range(20)]
 grid = tabulate.tabulate(grid, tablefmt="html")
 
 
@@ -18,3 +19,5 @@ def home():
 
 if __name__ == "__main__":
     app.run("localhost", 8080, debug=True)
+
+
