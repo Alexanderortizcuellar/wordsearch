@@ -3,7 +3,6 @@ from random import choice
 
 import tabulate
 from flask import Flask, redirect, render_template, request,url_for
-from ..wordsearch.wordsearch import WordSearch
 app = Flask(__name__)
 
 
