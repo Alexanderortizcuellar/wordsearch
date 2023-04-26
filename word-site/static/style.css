@@ -31,6 +31,14 @@ body {
   flex-direction: row;
 }
 
+.settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .right table {
   border: 2px solid rgb(200, 200, 200);
   border-radius: 10px;

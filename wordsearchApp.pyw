@@ -97,7 +97,7 @@ class ImportWords(QDialog, ui_words.Ui_words):
         file, kind = QFileDialog.getOpenFileName(
             self, "Select File", None, "CSV (*.csv);;")
         if file:
-            with open(file) as f:
+            with open(file, errors="ignore") as f:
                 reader = csv.reader(f)
                 words = list(reader)
             if len(words) >= 1:

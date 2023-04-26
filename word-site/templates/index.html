@@ -18,23 +18,34 @@
 				<div class="menu" >
 					<div class="tabbed-container">
 					<div class="buttons-heading">
-						<button class="settings"> Wordsearch settings</button>
+						<button class="settings-btn"> Wordsearch settings</button>
 						<button class="statistics"> Statistics</button>
 						<button class="words">Words </button>
 					</div>
-					<div class="" > 
-						<form action="" method="get"></form>
+					<div class="settings" > 
+						<form action="" method="get">
+								<label for="width">Width:</label><br>
+								<input type="number" id="width" name="width" required>
+								<div>
+								<label for="height">Height: </label><br>
+								<input type="number" id="height" name="height" required>
+								</div>
+								<div>
+									<label for="answers">Show answers </label>
+									<input type="checkbox" id="answers" name="answers">
+								</div>
+								<div>
+									<button class="run-btn" name="run" value="generate">Generate</button>
+								</div>
+								
+						</form>
 					</div>
-					<div class=""></div>
+
+					<div class="statistics"></div>
 					<div class=""></div>
 					</div>
 
 				</div>	
-				<div class="run">
-					<form action="" method="get">
-						<button class="run-btn" name="run" value="generate">Generate</button>
-					</form>
-				</div>
 
 			</div>
 
