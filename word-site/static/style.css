@@ -38,6 +38,51 @@ body {
   align-items: center;
 }
 
+label {
+  font-size: 14 px;
+  font-weight: bold;
+  color: rgba(0,0,0,0.8);
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.check-label {
+  text-align: center;
+  vertical-align: middle;
+}
+
+input[type=number] {
+  padding: 5px 5px;
+  border: 2px solid rgb(220, 220, 220);
+  font-size: 21px;
+  font-weight: bold;
+  color:rgba(0,0,0,0.7);
+  border-radius: 4px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+
+}
+
+input[type=number]:hover {
+  border: 2px solid rgb(65, 65, 65);
+}
+
+input[type=number]:focus {
+  border: 2px solid rgb(210, 210, 210);
+  background-color: rgb(230,230,230);
+  transition: 0.5s;
+}
+
+input[type=checkbox] {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  border:1px solid wheat;
+  width: 19px;
+  height: 19px;
+}
+
+
 
 .right table {
   border: 2px solid rgb(200, 200, 200);
@@ -52,10 +97,19 @@ td {
   color: rgb(65, 65, 65);
   font-size: 19px;
   font-weight: bold;
-  width: 8px;
-  height: 8px;
+  width: 24px;
+  height: 24px;
 }
 
+td:hover {
+  background-color:  rgb(210, 210, 210);
+
+}
+
+td::selection {
+  background-color: #4CAF50;
+  color: rgba(0,0,0,0.9);
+}
 .run {
   display: flex;
   width: 100%;
@@ -64,5 +118,30 @@ td {
 }
 
 .run-btn {
-  width: 100px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: #4CAF50;
+  border:none;
+  padding: 12px 19px;
+  color:white;
+  font-weight: bold;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
+
+.run-btn:hover {
+  background-color: #3a993d;
+  transition: 0.2s;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.run-btn:focus {
+  background-color: #276b28;
+  font-weight: bolder;
+  font-size: 16px;
+  
+}
+
+

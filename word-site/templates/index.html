@@ -30,10 +30,9 @@
 								<label for="height">Height: </label><br>
 								<input type="number" id="height" name="height" required>
 								</div>
-								<div>
-									<label for="answers">Show answers </label>
 									<input type="checkbox" id="answers" name="answers">
-								</div>
+									<label for="answers" class="check-label">Show answers </label><br>
+								
 								<div>
 									<button class="run-btn" name="run" value="generate">Generate</button>
 								</div>
@@ -41,7 +40,10 @@
 						</form>
 					</div>
 
-					<div class="statistics"></div>
+					<div class="statistics" style="display: none;">
+						<label for="words"> Words:</label><br>
+						<textarea name="words" id="" cols="30" rows="15"></textarea>
+					</div>
 					<div class=""></div>
 					</div>
 
