@@ -26,12 +26,12 @@
 					<div class="settings" > 
 						<form action="" method="get">
 								<label for="width">Width:</label><br>
-								<input type="number" id="width" name="width" required>
+								<input type="number" id="width" name="width" value="{{ width }}" required>
 								<div>
 								<label for="height">Height: </label><br>
-								<input type="number" id="height" name="height" required>
+								<input type="number" id="height" name="height" value= "{{ height }}" required>
 								</div>
-									<input type="checkbox" id="answers" name="answers">
+									<input type="checkbox" id="answers" name="answers" checked>
 									<label for="answers" class="check-label">Show answers </label><br>
 								
 								<div>
@@ -59,9 +59,9 @@
 				<table>
 					<tr>
 						<td onclick="change(this)">alex</td>
-						<td onmouseenter="main()">juan</td>
-						<td onmouseenter="main()">pedro</td>
-						<td onmouseenter="main()"> pablo</td>
+						<td>juan</td>
+						<td>pedro</td>
+						<td> pablo</td>
 					</tr>
 				</table>
 			</div>
@@ -72,6 +72,7 @@
 			function change(x) {
 				x.style.backgroundColor = "rgb(200,200,200)";
 			}
+
 		</script>
 	</body>
 </html>
