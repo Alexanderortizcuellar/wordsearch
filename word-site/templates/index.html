@@ -7,18 +7,41 @@
 		<title>Index</title>
 	</head>
 	<body>
+		<header>
+			<nav>
+
+			</nav>
+		</header>
 		<div class="container">
-			<div class="right">
-				{{ grid|safe  }}
-			</div>
+
 			<div class="left">
 				<div class="menu" >
+					<div class="tabbed-container">
+					<div class="buttons-heading">
+						<button class="settings"> Wordsearch settings</button>
+						<button class="statistics"> Statistics</button>
+						<button class="words">Words </button>
+					</div>
+					<div class=""> </div>
+					<div class=""></div>
+					<div class=""></div>
+					</div>
 
+				</div>	
+				<div class="run">
+					<form action="" method="get">
+						<button class="run-btn" name="run" value="generate">Generate</button>
+					</form>
 				</div>
 
 			</div>
 
+			<div class="right">
+				{{ grid|safe  }}
+			</div>
+			
 		</div>
 		</div>
+		
 	</body>
 </html>
