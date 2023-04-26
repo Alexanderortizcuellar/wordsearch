@@ -1,33 +1,60 @@
-.container {
-	display:flex;
+body {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 5px 5px 5px;
+}
 
+.container {
+  display: flex;
 }
 
 .right {
-	display:flex;
+  display: flex;
+  margin-left: 19px;
+}
 
+.menu {
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 5px 5px 5px 5px;
+}
+
+.tabbed-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons-heading {
+  display: flex;
+  flex-direction: row;
 }
 
 .right table {
-	border:2px solid  rgb(200,200,200);
-	border-radius: 10px;
-	text-align: center;
-	background-color:rgb(230,230,230);
-
-
-
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 10px;
+  text-align: center;
+  background-color: rgb(230, 230, 230);
 }
-
-
 
 td {
-	text-align: center;
-	padding: 4px 4px 4px 4px;
-	color:rgb(65,65, 65);
-	font-size: 19px;
-	font-weight:bold;
-	width:8px;
-	height:8px;
-
+  text-align: center;
+  padding: 4px 4px 4px 4px;
+  color: rgb(65, 65, 65);
+  font-size: 19px;
+  font-weight: bold;
+  width: 8px;
+  height: 8px;
 }
 
+.run {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+}
+
+.run-btn {
+  width: 100px;
+}

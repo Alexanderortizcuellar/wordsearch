@@ -16,8 +16,7 @@ import ui_export
 import ui_words
 import ui_wordsearch
 from wordsearch.wordsearch import WordSearch
-from utilities.utilities import clean_words, fill, remove_asterisks,predict_width_height
-
+from utilities.utilities import clean_words, fill, remove_asterisks, predict_width_height
 
 
 class WordSearchModel(QAbstractTableModel):
@@ -31,12 +30,12 @@ class WordSearchModel(QAbstractTableModel):
 
     def columnCount(self, parent: QModelIndex = ...) -> int:
         return len(self._data[0])
-    def case(self, text:str):
+
+    def case(self, text: str):
         text = str(text)
         if self.upper:
             return text.upper()
         return text.lower()
-
 
     def data(self, index: QModelIndex, role: int) -> bool:
         if role == Qt.DisplayRole:
@@ -111,7 +110,8 @@ class ImportWords(QDialog, ui_words.Ui_words):
                         self, "Import words", "Csv file must have one column, please adjust")
                     return
                 else:
-                    words = clean_words([item for sublist in words for item in sublist])
+                    words = clean_words(
+                        [item for sublist in words for item in sublist])
                     for word in range(len(words)):
                         self.words_list.setItem(
                             word, 0, QTableWidgetItem(str(words[word])))
@@ -278,8 +278,8 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
         self.rows.editingFinished.connect(
             lambda: self.columns.setValue(self.rows.value()))
         self.words_list.doubleClicked.connect(self.edit_word)
-        self.uppercase.clicked.connect(lambda x:self.switch_case(True))
-        self.lowercase.clicked.connect(lambda x:self.switch_case(False))
+        self.uppercase.clicked.connect(lambda x: self.switch_case(True))
+        self.lowercase.clicked.connect(lambda x: self.switch_case(False))
         self.show_answers.clicked.connect(self.show_answers_func)
         self.wordsearch_table.horizontalHeader().hide()
         self.wordsearch_table.verticalHeader().hide()
@@ -296,8 +296,9 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
                 self.columns.setValue(size)
             self.wordsearch = WordSearch(
                 words, self.rows.value(), self.columns.value(), True)
-            
-            self.model = WordSearchModel(fill(deepcopy(self.wordsearch.grid)), self.uppercase.isChecked())
+
+            self.model = WordSearchModel(
+                fill(deepcopy(self.wordsearch.grid)), self.uppercase.isChecked())
             self.wordsearch_table.setModel(self.model)
             self.show_answers_func()
             self.number_words.setText(
@@ -333,25 +334,24 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
     def switch_case(self, upper):
         if self.wordsearch is not None:
             self.wordsearch_table.setModel(None)
-            self.model = WordSearchModel(fill(deepcopy(self.wordsearch.grid)), upper)
+            self.model = WordSearchModel(
+                fill(deepcopy(self.wordsearch.grid)), upper)
             self.wordsearch_table.setModel(self.model)
             self.show_answers_func()
             for col in range(self.model.columnCount()):
                 self.wordsearch_table.setColumnWidth(col, 4)
-            
+
     def show_answers_func(self):
         if self.wordsearch is not None:
-            current_grid = remove_asterisks(deepcopy(self.wordsearch.grid)) if self.show_answers.isChecked() else fill(deepcopy(self.wordsearch.grid))
+            current_grid = remove_asterisks(deepcopy(self.wordsearch.grid)) if self.show_answers.isChecked(
+            ) else fill(deepcopy(self.wordsearch.grid))
             self.wordsearch_table.setModel(None)
-            self.model = WordSearchModel(current_grid, self.uppercase.isChecked())
+            self.model = WordSearchModel(
+                current_grid, self.uppercase.isChecked())
             self.wordsearch_table.setModel(self.model)
 
             for col in range(self.model.columnCount()):
                 self.wordsearch_table.setColumnWidth(col, 4)
-
-       
-
-
 
     def set_title_font(self):
         fontdlg = QFontDialog(self)
@@ -360,11 +360,11 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
         print(font.family(), font.pointSize(), font.weight())
 
     def set_letters_font(self):
-        font,ok = QFontDialog(self).getFont()
+        font, ok = QFontDialog(self).getFont()
         if ok:
             bold_dict = {
-                "50":"normal",
-                "75":"bold"
+                "50": "normal",
+                "75": "bold"
             }
             style = f"""
                 font-family:{font.family()};
@@ -393,15 +393,17 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
         color = QColorDialog(self).getColor()
         if color.isValid():
             if self.table_style is not None:
-                self.table_style = "QTableView { "+f"\tcolor:rgb({color.red()},{color.green()},{color.blue()});"+"}"              
+                self.table_style = "QTableView { " + \
+                    f"\tcolor:rgb({color.red()},{color.green()},{color.blue()});"+"}"
             else:
                 style = f"""
                         color:rgb({color.red()},{color.green()},{color.blue()});
                 """
-                self.table_style =  """ 
+                self.table_style = """ 
                         QTableView { """+style+" }"
             self.wordsearch_table.setStyleSheet(self.table_style)
             print(self.table_style)
+
     def manage_styles(self):
         pass
 
@@ -414,14 +416,14 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
         dlg = ImportWords(self)
         dlg.exec_()
 
-    def get_words(self, listwidget:QListWidget) -> list[str]:
+    def get_words(self, listwidget: QListWidget) -> list[str]:
         if listwidget.count() > 0:
-            words = [listwidget.item(row).text() for row in range(listwidget.count())]
+            words = [listwidget.item(row).text()
+                     for row in range(listwidget.count())]
             listwidget.clear()
             words = clean_words(words)
             return words
         return None
-
 
     def add_word(self):
         word, ok = QInputDialog.getText(
@@ -469,9 +471,7 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
 
 
 app = QApplication(sys.argv)
-#app.setStyleSheet(load_stylesheet())
+# app.setStyleSheet(load_stylesheet())
 window = Window()
 window.show()
 app.exec_()
-
-
