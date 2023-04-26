@@ -3,6 +3,9 @@ from random import choice
 
 import tabulate
 from flask import Flask, redirect, render_template, request,url_for
+from wordsearch import WordSearch
+
+
 app = Flask(__name__)
 
 
@@ -13,8 +16,8 @@ def home():
     show_answers = request.args.get("answers")
     if height is None or width is None:
         width,height = 10,10 
-    grid = [[choice(string.ascii_uppercase) for col in range(int(width))]
-            for row in range(int(height))]
+    words = ["alexander", "pedro"]
+    grid = WordSearch(words, int(width), int(height)).grid
     grid = tabulate.tabulate(grid, tablefmt="html")
     return render_template("index.html", grid=grid, width=width, height=height)
 
