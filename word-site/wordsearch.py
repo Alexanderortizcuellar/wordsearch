@@ -127,14 +127,14 @@ class WordSearch():
                 len(word) < self.height else ystart-len(word)
             positions = []
             for i, c in enumerate(word):
-                if xstart+i*d[0] < 0 or ystart+i*d[1] < 0:
+                if ystart+i*d[0] < 0 or xstart+i*d[1] < 0:
                     break
                 if xstart+i*d[0] >= self.width or ystart+i*d[1] >= self.height:
                     break
-                pos = grid[xstart+i*d[0]][ystart+i*d[1]]
+                pos = grid[ystart+i*d[0]][xstart+i*d[1]]
                 if pos == "*" or pos == word[i]:
                     #grid[xstart+i*d[0]][ystart+i*d[1]] = word[i]
-                    position = xstart+i*d[0], ystart+i*d[1], c
+                    position = ystart+i*d[0], xstart+i*d[1], c
                     positions.append(position)
                 else:
                     positions.clear()
