@@ -81,6 +81,7 @@ class WordSearch():
 
     def retry(self, word, grid: list):
         candidates = []
+        positions = []
         for row in range(self.height):
             for item in range(self.width):
                 if grid[row][item] == "*" or grid[row][item] == word[0]:

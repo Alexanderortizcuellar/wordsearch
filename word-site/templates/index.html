@@ -8,6 +8,9 @@
 	</head>
 	<body>
 		<header>
+			<script src="static/index.js">
+
+			</script>
 			<h1>Wordsearch generator</h1>
 			<nav>
 
@@ -19,11 +22,11 @@
 				<div class="menu" >
 					<div class="tabbed-container">
 					<div class="buttons-heading">
-						<button class="settings-btn"> Wordsearch settings</button>
-						<button class="statistics"> Statistics</button>
-						<button class="words">Words </button>
+						<button class="tab-btn"  onclick="tabManager(event, 'settings');"> Wordsearch settings</button>
+						<button class="tab-btn"  onclick="tabManager(event, 'statistics');" > Statistics </button>
+						<button class="tab-btn"  onclick="tabManager(event, 'words');">Words </button>
 					</div>
-					<div class="settings" > 
+					<div class="settings"  id="settings"> 
 						<form action="" method="get">
 								<label for="width">Width:</label><br>
 								<input type="number" id="width" name="width" value="{{ width }}" required>
@@ -41,11 +44,15 @@
 						</form>
 					</div>
 
-					<div class="statistics" style="display: none;">
+					<div class="settings" id="statistics">
+						<button>hola alex</button>
+					</div>
+
+					<div class="settings" id="words" >
 						<label for="words"> Words:</label><br>
 						<textarea name="words" id="" cols="30" rows="15"></textarea>
 					</div>
-					<div class=""></div>
+
 					</div>
 
 				</div>	
@@ -56,14 +63,11 @@
 				{{ grid|safe  }}
 			</div>
 			<div>
-				<table>
-					<tr>
-						<td onclick="change(this)">alex</td>
-						<td>juan</td>
-						<td>pedro</td>
-						<td> pablo</td>
-					</tr>
-				</table>
+				<ol>
+					{% for word in words %}
+						<li class="word"> {{ word }} </li>
+					{% endfor  %}
+				</ol>
 			</div>
 			
 		</div>

@@ -80,6 +80,7 @@ class WordSearch():
                     grid[row][item] = random.choice(string.ascii_uppercase)
 
     def retry(self, word, grid: list):
+        positions = []
         candidates = []
         for row in range(self.height):
             for item in range(self.width):
