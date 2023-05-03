@@ -91,7 +91,7 @@ class WordSearch():
                 positions = []
                 found = False
                 for i, c in enumerate(word):
-                    if p[0]+i*d[0] >= self.width or p[1]+i*d[1] >= self.height:
+                    if p[0]+i*d[0] >= self.height or p[1]+i*d[1] >= self.width:
                         positions.clear()
                         break
                     pos = grid[p[0]+i*d[0]][p[1]+i*d[1]]
