@@ -54,8 +54,20 @@ body {
 
 }
 
-
+/*
 .settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+
+*/
+
+
+.form-con {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,8 +79,14 @@ body {
 #statistics, #words {
   display: none;
 
+
 }
 
+#statistics, #words button{
+  width: 100%;
+  
+
+}
 
 
 label {

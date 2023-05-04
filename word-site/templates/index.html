@@ -1,82 +1,109 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="/static/style.css"  charset="utf-8">
-		<title>Wordsearch generator</title>
-	</head>
-	<body>
-		<header>
-			<script src="static/index.js">
 
-			</script>
-			<h1>Wordsearch generator</h1>
-			<nav>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet" href="/static/style.css" charset="utf-8">
+	<title>Wordsearch generator</title>
+</head>
 
-			</nav>
-		</header>
-		<div class="container">
+<body>
+	<header>
+		<script src="static/index.js">
 
-			<div class="left">
-				<div class="menu" >
-					<div class="tabbed-container">
+		</script>
+		<h1>Wordsearch generator</h1>
+		<nav>
+
+		</nav>
+	</header>
+	<div class="container">
+
+		<div class="left">
+			<div class="menu">
+				<div class="tabbed-container">
 					<div class="buttons-heading">
-						<button class="tab-btn"  onclick="tabManager(event, 'settings');"> Wordsearch settings</button>
-						<button class="tab-btn"  onclick="tabManager(event, 'statistics');" > Statistics </button>
-						<button class="tab-btn"  onclick="tabManager(event, 'words');">Words </button>
+						<button class="tab-btn" onclick="tabManager(event, 'settings');"> Wordsearch settings</button>
+						<button class="tab-btn" onclick="tabManager(event, 'statistics');"> Statistics </button>
+						<button class="tab-btn" onclick="tabManager(event, 'words');">Words </button>
 					</div>
-					<div class="settings"  id="settings"> 
+
+					<div class="form-con">
 						<form action="" method="get">
+							<div class="settings" id="settings">
+
 								<label for="width">Width:</label><br>
 								<input type="number" id="width" name="width" value="{{ width }}" required>
 								<div>
-								<label for="height">Height: </label><br>
-								<input type="number" id="height" name="height" value= "{{ height }}" required>
+									<label for="height">Height: </label><br>
+									<input type="number" id="height" name="height" value="{{ height }}" required>
 								</div>
-									<input type="checkbox" id="answers" name="answers" checked>
-									<label for="answers" class="check-label">Show answers </label><br>
-								
+								<input type="checkbox" id="answers" name="answers" checked>
+								<label for="answers" class="check-label">Show answers </label><br>
+
 								<div>
 									<button class="run-btn" name="run" value="generate">Generate</button>
 								</div>
-								
+
+
+							</div>
+
+							<div class="settings" id="statistics">
+								<button>hola alex</button>
+								<button class="run-btn" name="run" value="generate">Generate</button>
+							</div>
+
+							<div class="settings" id="words" style="overflow: auto;">
+								<h3>words</h3>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<input type="text" id="word" name="word"> <br>
+								<button class="run-btn" name="run" value="generate">Generate</button>
+							</div>
 						</form>
 					</div>
 
-					<div class="settings" id="statistics">
-						<button>hola alex</button>
-					</div>
-
-					<div class="settings" id="words" >
-						<label for="words"> Words:</label><br>
-						<textarea name="words" id="" cols="30" rows="15"></textarea>
-					</div>
-
-					</div>
-
-				</div>	
+				</div>
 
 			</div>
 
-			<div class="right">
-				{{ grid|safe  }}
-			</div>
-			<div>
-				<ol>
-					{% for word in words %}
-						<li class="word"> {{ word }} </li>
-					{% endfor  %}
-				</ol>
-			</div>
-			
 		</div>
-		</div>
-		<script>
-			function change(x) {
-				x.style.backgroundColor = "rgb(200,200,200)";
-			}
 
-		</script>
-	</body>
+		<div class="right">
+			{{ grid|safe }}
+		</div>
+		<div>
+			<ol>
+				{% for word in words %}
+				<li class="word"> {{ word }} </li>
+				{% endfor %}
+			</ol>
+		</div>
+
+	</div>
+	</div>
+	<script>
+		function change(x) {
+			x.style.backgroundColor = "rgb(200,200,200)";
+		}
+
+	</script>
+</body>
+
 </html>

@@ -14,9 +14,11 @@ def home():
     width = request.args.get("width")
     height = request.args.get("height")
     show_answers = request.args.get("answers")
+    words = list(request.args.getlist("word"))
+    words = [word for word in words if word != ""]
     if height is None or width is None:
         width, height = 10, 10
-    words = [
+    """words = [
         "DESENMASCARAR",
         "SATISFACTION",
         "MINIMIZING",
@@ -34,7 +36,8 @@ def home():
         "MARIA",
         "ALEX",
         "JAMAS"
-    ]
+    ]"""
+
     shuffle(words)
     grid = WordSearch(words, int(width), int(height)).grid
     grid = tabulate.tabulate(grid, tablefmt="html")
