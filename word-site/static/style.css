@@ -1,233 +1,216 @@
 h1 {
-	text-align: center;
+  text-align: center;
 }
 
 body {
-	display: flex;
-	flex-direction: column;
-	background: linear-gradient(160deg, #00ff87, #60efff );
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(260deg, #00ff87, #60efff);
 }
-
-
-
 
 .container {
-	display: flex;
-	flex:1;
+  display: flex;
+  flex: 1;
 }
-
-
 
 .right {
-	display: flex;
-
+  margin-left: 3%;
 }
-
 
 .left {
-	display:flex;
+  display: flex;
 }
 .menu {
-	border: 2px solid rgb(200, 200, 200);
-	border-radius: 10px;
-	width: 100%;
-	height: 100%;
-	padding: 5px 5px 5px 5px;
-	background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 5px 5px 5px 5px;
+  background-color: white;
 }
 
 .tabbed-container {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .buttons-heading {
-	display: flex;
-	flex-direction: row;
-	margin-bottom: 8px;
-	padding-top: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+  padding-top: 0;
 }
 
 .buttons-heading button {
-	width: 100%;
-	border:none;
-	margin-left: 2%;
-	background-color: rgba(76, 175, 80, 1.0);
-	border-radius: 4px;
-	font-size: 15px;
-	color: rgba(245, 245, 245, 0.86);
-	font-weight: bold;
-	font-family: Arial, Helvetica, sans-serif;
-	text-align: center;
-	padding: 6px 7px;
-
+  width: 100%;
+  border: none;
+  margin-left: 2%;
+  background-color: rgba(76, 175, 80, 1);
+  border-radius: 4px;
+  font-size: 15px;
+  color: rgba(245, 245, 245, 0.86);
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding: 6px 7px;
 }
-
-
-
 
 .form-con {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: white;
-	width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: 100%;
 }
 
-
-#statistics, #words {
-	display: none;
-
-
+#statistics,
+#words {
+  display: none;
 }
 
-#statistics, #words button {
-	width: 100%;
-
-
+#statistics,
+#words button {
+  width: 100%;
 }
 
 #words input {
-	padding:4px 5px;
-	border:1px solid black;
-	border-radius:4px;
+  padding: 4px 5px;
+  border: 1px solid black;
+  border-radius: 4px;
 }
 
 label {
-	font-size: 14 px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: bolder;
-	color: rgba(0, 0, 0, 0.8);
-	margin-top: 6px;
-	margin-bottom: 6px;
+  font-size: 14 px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
 .check-label {
-	text-align: center;
-	vertical-align: middle;
+  text-align: center;
+  vertical-align: middle;
 }
 
 input[type="number"] {
-	padding: 7px 10px;
-	border: 2px solid rgb(220, 220, 220);
-	font-size: 22px;
-	font-weight: bold;
-	color: rgba(0, 0, 0, 0.9);
-	border-radius: 4px;
-	margin-top: 6px;
-	margin-bottom: 6px;
+  padding: 7px 10px;
+  border: 2px solid rgb(220, 220, 220);
+  font-size: 22px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
 input[type="number"]:hover {
-	border: 2px solid rgb(65, 65, 65);
+  border: 2px solid rgb(65, 65, 65);
 }
 
 input[type="number"]:focus {
-	border: 2px solid rgb(230, 230, 230);
-	background-color: rgb(220, 220, 220);
-	transition: 0.5s;
+  border: 2px solid rgb(230, 230, 230);
+  background-color: rgb(220, 220, 220);
+  transition: 0.5s;
 }
 
 input[type="checkbox"] {
-	margin-top: 6px;
-	margin-bottom: 6px;
-	border-radius: 4px;
-	border: 1px solid wheat;
-	width: 19px;
-	height: 19px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  border: 1px solid wheat;
+  width: 19px;
+  height: 19px;
 }
 
 .right table {
-	border: 2px solid rgb(200, 200, 200);
-	border-radius: 10px;
-	text-align: center;
-	background-color: rgb(230, 230, 230);
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 10px;
+  text-align: center;
+  background-color: rgb(230, 230, 230);
 }
 
 td {
-	text-align: center;
-	padding: 4px 4px 4px 4px;
-	color: rgb(65, 65, 65);
-	font-size: 16px;
-	font-weight: bold;
-	width: auto;
-	height: auto;
+  text-align: center;
+  padding: 4px 4px 4px 4px;
+  color: rgb(65, 65, 65);
+  font-size: 18px;
+  font-weight: bold;
+  width: auto;
+  height: auto;
 }
 
 td:hover {
-	background-color: rgb(215, 215, 215);
+  background-color: rgb(215, 215, 215);
 }
 
 td::selection {
-	background-color: white;
-	color: rgba(0, 0, 0, 0.9);
+  background-color: white;
+  color: rgba(0, 0, 0, 0.9);
 }
 .run {
-	display: flex;
-	width: 100%;
-	height: 100%;
-	background-color: blue;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
 }
 
 .run-btn {
-	width: 100%;
-	border-radius: 3px;
-	background-color: #4caf50;
-	border: none;
-	padding: 12px 19px;
-	color: white;
-	font-weight: bold;
-	box-sizing: border-box;
-	margin-top: 6px;
-	margin-bottom: 6px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: #4caf50;
+  border: none;
+  padding: 12px 19px;
+  color: white;
+  font-weight: bold;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
 .run-btn:hover {
-	background-color: #3a993d;
-	transition: 0.2s;
-	cursor: pointer;
-	font-size: 14px;
+  background-color: #3a993d;
+  transition: 0.2s;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .run-btn:focus {
-	background-color: #276b28;
-	font-weight: bolder;
-	font-size: 16px;
+  background-color: #276b28;
+  font-weight: bolder;
+  font-size: 16px;
 }
-
-
 
 .word {
-	font-size: 13px;
-	font-family: Arial, Helvetica, sans-serif;
-	padding: 3px 4px;
-	text-transform: uppercase;
-
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 3px 4px;
+  text-transform: uppercase;
 }
 
+@media (max-width: 700px) {
+  body {
+    margin: 0;
+  }
+  .container {
+    flex-direction: column;
+    flex: 1;
+  }
 
-@media (max-width:700px) {
-	body {
-		margin:0;
-	}
-	.container {
-		flex-direction:column;
-		flex:1;
-	}
-
-	.right {
-		flex:1;
-		margin:0;
-		overflow:auto;
-		margin-top:2%;
-
-	}
-	.left {
-		flex:1;
-	}
-	table {
-		flex:1;
-	}
-
+  .right {
+	display: flex;
+    flex: 1;
+    margin: 0;
+    overflow: auto;
+    margin-top: 2%;
+	margin-left: 0%;
+  }
+  .left {
+	display: flex;
+    flex: 1;
+  }
+  table {
+    flex: 1;
+  }
 }

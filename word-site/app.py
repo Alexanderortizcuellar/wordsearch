@@ -18,26 +18,6 @@ def home():
     words = [word for word in words if word != ""]
     if height is None or width is None:
         width, height = 10, 10
-    """words = [
-        "DESENMASCARAR",
-        "SATISFACTION",
-        "MINIMIZING",
-        "ALEXANDER",
-        "EXCELLENT",
-        "PERDONAR",
-        "ENTREGAR",
-        "TOMATO",
-        "PYTHON",
-        "BULDOG",
-        "RECIBIR",
-        "MARCOS",
-        "PEDRO",
-        "BOXER",
-        "MARIA",
-        "ALEX",
-        "JAMAS"
-    ]
-"""
 
     shuffle(words)
     grid = WordSearch(words, int(width), int(height)).grid
