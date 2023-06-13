@@ -1,26 +1,25 @@
+import csv
+import datetime
+import json
 import random
 import string
-import csv
 import time
-import datetime
-import typing
-from openpyxl import Workbook
-from openpyxl.worksheet.worksheet import Worksheet
-from openpyxl.cell.cell import Cell
-from openpyxl.styles import Font, Border, Alignment, Side, PatternFill
-from openpyxl.utils import get_column_letter
-import json
-from rich.console import Console
-from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4, letter, legal
-from reportlab.platypus import Table, TableStyle, Paragraph, SimpleDocTemplate, Spacer
-from reportlab.lib.units import mm
-from reportlab.lib.styles import ParagraphStyle, TA_CENTER
-from more_itertools import grouper
-from jinja2.environment import Environment
-from jinja2.loaders import FileSystemLoader
+
 from docx import Document
+from more_itertools import grouper
+from openpyxl import Workbook
+from openpyxl.cell.cell import Cell
+from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
+from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.worksheet import Worksheet
+from reportlab.lib import colors
+from reportlab.lib.styles import TA_CENTER, ParagraphStyle
+from reportlab.lib.units import mm
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table
+from rich.console import Console
 from unidecode import unidecode
+
+time.time()
 
 
 def clean_words(words: list[str]):
@@ -31,21 +30,47 @@ def clean_words(words: list[str]):
     return words
 
 
+def fill(grid):
+    width = len(grid[0])
+    height = len(grid)
+    for row in range(height):
+        for item in range(width):
+            if grid[row][item] == "*":
+                grid[row][item] = random.choice(string.ascii_uppercase)
+    return grid
+
+
 color_names = [
-    "orange4", "bright_blue", "blue", "yellow",
-    "green", "magenta", "red", "cyan", "dark_orange",
-    "steel_blue3", "bright_red", "dark_red"
+    "orange4",
+    "bright_blue",
+    "blue",
+    "yellow",
+    "green",
+    "magenta",
+    "red",
+    "cyan",
+    "dark_orange",
+    "steel_blue3",
+    "bright_red",
+    "dark_red",
 ]
 
 
 list_colors = [
-    colors.darkgreen, colors.blue, colors.red,
-    colors.darkorange, colors.brown, colors.darkblue,
-    colors.darkgoldenrod]
+    colors.darkgreen,
+    colors.blue,
+    colors.red,
+    colors.darkorange,
+    colors.brown,
+    colors.darkblue,
+    colors.darkgoldenrod,
+]
 
 
-class WordSearch():
-    def __init__(self, words: list, width: int, height, show_answers=False) -> None:
+class WordSearch:
+    def __init__(self, words: list,
+                 width: int, height,
+                 show_answers=False) -> None:
         self.words = words
         self.width = width
         self.height = height
@@ -54,9 +79,9 @@ class WordSearch():
         self.generate()
 
     def process_words(self):
-        """ processing the words to optimize
-                the code
-         """
+        """processing the words to optimize
+        the code
+        """
         # sorting the words by length
         words = sorted(self.words, key=len, reverse=True)
         # making all the words upper case
@@ -65,8 +90,7 @@ class WordSearch():
         return words
 
     def make_grid(self):
-        grid = [["*" for col in range(self.width)]
-                for row in range(self.height)]
+        grid = [["*" for col in range(self.width)] for row in range(self.height)]
         return grid
 
     def place_word(self, positions, grid):
@@ -87,17 +111,16 @@ class WordSearch():
                 if grid[row][item] == "*" or grid[row][item] == word[0]:
                     candidates.append((row, item))
         for p in candidates:
-            done = False
             for d in self.directions:
                 positions = []
                 found = False
                 for i, c in enumerate(word):
-                    if p[0]+i*d[0] >= self.height or p[1]+i*d[1] >= self.width:
+                    if p[0] + i * d[0] >= self.height or p[1] + i * d[1] >= self.width:
                         positions.clear()
                         break
-                    pos = grid[p[0]+i*d[0]][p[1]+i*d[1]]
+                    pos = grid[p[0] + i * d[0]][p[1] + i * d[1]]
                     if pos == "*" or pos == c:
-                        positions.append((p[0]+i*d[0], p[1]+i*d[1], c))
+                        positions.append((p[0] + i * d[0], p[1] + i * d[1], c))
                     else:
                         positions.clear()
                         break
@@ -106,36 +129,34 @@ class WordSearch():
                     found = True
                     return (True, positions)
                     break
-                if found == True:
+                if found is True:
                     break
                 continue
-            if found == True:
+            if found is True:
                 break
         return False, positions
 
     def locate(self, word, grid):
         tries = 0
         placed = False
-        while placed == False and tries <= 2000:
+        while placed is False and tries <= 2000:
             random.shuffle(self.directions)
             d = random.choice(self.directions)
             word = random.choice([word, word[::-1]])
             xstart = random.randint(0, self.width)
             ystart = random.randint(0, self.height)
-            xstart = xstart if xstart + \
-                len(word) < self.width else xstart-len(word)
-            ystart = ystart if ystart + \
-                len(word) < self.height else ystart-len(word)
+            xstart = xstart if xstart + len(word) < self.width else xstart - len(word)
+            ystart = ystart if ystart + len(word) < self.height else ystart - len(word)
             positions = []
             for i, c in enumerate(word):
-                if ystart+i*d[0] < 0 or xstart+i*d[1] < 0:
+                if ystart + i * d[0] < 0 or xstart + i * d[1] < 0:
                     break
-                if xstart+i*d[0] >= self.width or ystart+i*d[1] >= self.height:
+                if xstart + i * d[0] >= self.width or ystart + i * d[1] >= self.height:
                     break
-                pos = grid[ystart+i*d[0]][xstart+i*d[1]]
+                pos = grid[ystart + i * d[0]][xstart + i * d[1]]
                 if pos == "*" or pos == word[i]:
-                    #grid[xstart+i*d[0]][ystart+i*d[1]] = word[i]
-                    position = ystart+i*d[0], xstart+i*d[1], c
+                    # grid[xstart+i*d[0]][ystart+i*d[1]] = word[i]
+                    position = ystart + i * d[0], xstart + i * d[1], c
                     positions.append(position)
                 else:
                     positions.clear()
@@ -148,8 +169,7 @@ class WordSearch():
             if tries == 2000:
                 added, positions = self.retry(word, grid)
                 if not added:
-                    print(
-                        f"tried {tries} times and could not add {word}, skipping")
+                    print(f"tried {tries} times and could not add {word}, skipping")
                 return positions
             continue
 
@@ -158,7 +178,7 @@ class WordSearch():
         if len(words) > 0:
             len_longest = len(words[0])
             letters = sum(list(map(len, words)))
-            total = letters*2.3
+            total = letters * 2.3
             dimension = round(total**0.5)
             if dimension < len_longest:
                 dimension = len_longest
@@ -168,8 +188,7 @@ class WordSearch():
         color = random.choice(color_names)
         word_position = self.all_positions[word]
         for pos in word_position:
-            self.grid[pos[0]][pos[1]
-                              ] = f"[bold {color}]{pos[2]}[/bold {color}]"
+            self.grid[pos[0]][pos[1]] = f"[bold {color}]{pos[2]}[/bold {color}]"
 
     def pos_to_style(self, pos: list):
         color = random.choice(list_colors)
@@ -183,9 +202,11 @@ class WordSearch():
                 style = [("BACKGROUND", p, p, color) for p in pos]
             return style
 
-    def export_pdf(self, filename: str, title: str, answers=False, fontsize=12):
+    def export_pdf(self, filename: str,
+                   title: str, answers=False,
+                   fontsize=12):
         pdf = SimpleDocTemplate(filename)
-        table = Table(self.grid, colWidths=6*mm, rowHeights=6*mm)
+        table = Table(fill(self.grid), colWidths=6 * mm, rowHeights=6 * mm)
         STYLE = []
         for p in self.all_positions:
             styles = self.pos_to_style(self.all_positions[p])
@@ -197,21 +218,22 @@ class WordSearch():
                     STYLE.append(styles)
         border = ("BOX", (0, 0), (-1, -1), 1, colors.black)
         STYLE.append(border)
-        STYLE.append(('ALIGN', (0, 0), (-1, -1), 'CENTRE'))
-        STYLE.append(('FONTSIZE', (0, 0), (-1, -1), fontsize))
-        table_style = [border] if answers == False else STYLE
+        STYLE.append(("ALIGN", (0, 0), (-1, -1), "CENTRE"))
+        STYLE.append(("FONTSIZE", (0, 0), (-1, -1), fontsize))
+        table_style = [border] if answers is False else STYLE
         table.setStyle(table_style)
         paragraph_style = ParagraphStyle(
-            name="p", alignment=TA_CENTER, fontSize=18, spaceAfter=30)
+            name="p", alignment=TA_CENTER, fontSize=18, spaceAfter=30
+        )
         paragraph = Paragraph(title, style=paragraph_style)
 
         d = list(grouper(self.words, 4))
         words_table = Table(d)
-        pdf.build([paragraph, table, Spacer(pdf.width, 10*mm), words_table])
+        pdf.build([paragraph, table, Spacer(pdf.width, 10 * mm), words_table])
 
     def show(self, answer: bool = False):
         console = Console()
-        if answer == True:
+        if answer is True:
             for word in self.process_words():
                 self.color_word(word)
         for row in self.grid:
@@ -227,22 +249,28 @@ class WordSearch():
         if not self.show_answers:
             self.fill(grid)
         self.grid = grid
-        placed = [word for word in self.all_positions if len(
-            self.all_positions[word]) >= 1]
-        not_placed = [word for word in self.all_positions if len(
-            self.all_positions[word]) == 0]
+        placed = [
+            word for word in self.all_positions 
+            if len(self.all_positions[word]) >= 1
+        ]
+        not_placed = [
+            word for word in self.all_positions
+            if len(self.all_positions[word]) == 0
+        ]
         number_letters_words = sum([len(key) for key in self.all_positions])
         self.output = {
-            "wordsearch": grid, "positions": self.all_positions,
+            "wordsearch": grid,
+            "positions": self.all_positions,
             "words": list(self.all_positions.keys()),
             "number-words": len(self.all_positions),
             "number-words-placed": len(placed),
             "number-words-no-placed": len(not_placed),
-            "words-placed": placed, "words-not-placed": not_placed,
-            "number-letters": self.width*self.height,
+            "words-placed": placed,
+            "words-not-placed": not_placed,
+            "number-letters": self.width * self.height,
             "number-letter-words": number_letters_words,
-            "number-random-letters": (self.width*self.height) - number_letters_words,
-            "time-created": datetime.datetime.now().strftime("%Y-%m-%d-%I:%M:%S %p")
+            "number-random-letters": (self.width * self.height) - number_letters_words,
+            "time-created": datetime.datetime.now().strftime("%Y-%m-%d-%I:%M:%S %p"),
         }
 
     def export_text(self, filename: str):
@@ -251,7 +279,7 @@ class WordSearch():
                 file.write(f'{" ".join(row)}\n')
             file.write("________________________________\n")
             for word in self.all_positions.keys():
-                file.write(word+"\n")
+                file.write(word + "\n")
 
     def export_csv(self, filename: str, delimiter=",", encoding="UTF-8"):
         with open(filename, "w", newline="", encoding=encoding) as file:
@@ -272,26 +300,34 @@ class WordSearch():
             color = random.choice(colors)
             for pos in coords[key]:
                 ws[pos[0]].fill = PatternFill(
-                    start_color=color, end_color=color, fill_type="solid")
+                    start_color=color, end_color=color, fill_type="solid"
+                )
 
     def all_pos_to_excel_coords(self):
         self.excel_cords = {}
         for key, val in list(self.all_positions.items()):
             self.excel_cords[key] = self.pos_to_excel(val)
 
-    def export_excel(self, filename: str, sheetname: str = "wordsearch", answers=False, fontname="Arial", fontsize=16):
+    def export_excel(
+        self,
+        filename: str,
+        sheetname: str = "wordsearch",
+        answers=False,
+        fontname="Arial",
+        fontsize=16,
+    ):
         self.all_pos_to_excel_coords()
         wb = Workbook()
         ws: Worksheet = wb.active
         ws["A2"] = ""
-        end_letter = get_column_letter(self.width+1)
+        end_letter = get_column_letter(self.width + 1)
         ws.merge_cells(f"B1:{end_letter}1")
 
         values = self.grid
         for row in values:
             ws.append(row)
 
-        for col in range(2, self.width+2):
+        for col in range(2, self.width + 2):
             letter = get_column_letter(col)
             ws.column_dimensions[letter].width = 5
         ws.insert_cols(1, 1)
@@ -300,22 +336,28 @@ class WordSearch():
         ws["B1"].font = Font(name="Arial", size=21)
         ws["B1"].alignment = Alignment(horizontal="center", vertical="center")
         cell: Cell
-        for row in ws.iter_rows(min_row=3, max_row=self.width+2, min_col=2, max_col=self.width+1):
+        for row in ws.iter_rows(
+            min_row=3, max_row=self.width + 2, min_col=2, max_col=self.width + 1
+        ):
             for cell in row:
                 cell.font = Font(size=fontsize, name=fontname, bold=True)
-                cell.alignment = Alignment(
-                    horizontal="center", vertical="center")
-                side = Side(border_style="thin", color='FF000000')
-                cell.border = Border(left=side, right=side,
-                                     top=side, bottom=side)
+                cell.alignment = Alignment(horizontal="center", vertical="center")
+                side = Side(border_style="thin", color="FF000000")
+                cell.border = Border(left=side, right=side, top=side, bottom=side)
                 cell.fill = PatternFill(
-                    start_color="e1e1e1", end_color="a6a6a6", fill_type="solid")
-        for row in ws.iter_rows(min_row=3, min_col=self.width+3, max_row=2+len(self.all_positions.keys()), max_col=self.width+3):
+                    start_color="e1e1e1", end_color="a6a6a6", fill_type="solid"
+                )
+        for row in ws.iter_rows(
+            min_row=3,
+            min_col=self.width + 3,
+            max_row=2 + len(self.all_positions.keys()),
+            max_col=self.width + 3,
+        ):
             for cell in row:
-                cell.value = list(self.all_positions.keys())[cell.row-3]
-        ws.column_dimensions[get_column_letter(self.width+3)].width = 18
+                cell.value = list(self.all_positions.keys())[cell.row - 3]
+        ws.column_dimensions[get_column_letter(self.width + 3)].width = 18
         ws.title = sheetname if sheetname != "" else "wordsearch"
-        if answers == True:
+        if answers is True:
             self.style_ws(ws, self.excel_cords)
         wb.save(filename)
 
@@ -338,3 +380,4 @@ class WordSearch():
 
     def export_html(self, filename):
         pass
+

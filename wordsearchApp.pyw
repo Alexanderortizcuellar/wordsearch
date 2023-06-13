@@ -3,7 +3,6 @@ import os
 import random
 import string
 import sys
-import typing
 from copy import deepcopy
 
 from PyQt5.QtCore import *
@@ -15,7 +14,7 @@ import ui_batch
 import ui_export
 import ui_words
 import ui_wordsearch
-from wordsearch.wordsearch import WordSearch
+from wordsearch import WordSearch
 from utilities.utilities import clean_words, fill, remove_asterisks, predict_width_height
 
 
