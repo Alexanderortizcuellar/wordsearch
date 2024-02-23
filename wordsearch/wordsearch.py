@@ -5,7 +5,7 @@ import random
 import string
 import time
 
-from docx import Document
+# from docx import Document
 from more_itertools import grouper
 from openpyxl import Workbook
 from openpyxl.cell.cell import Cell
@@ -90,7 +90,8 @@ class WordSearch:
         return words
 
     def make_grid(self):
-        grid = [["*" for col in range(self.width)] for row in range(self.height)]
+        grid = [["*" for col in range(self.width)]
+                for row in range(self.height)]
         return grid
 
     def place_word(self, positions, grid):
@@ -104,6 +105,7 @@ class WordSearch:
                     grid[row][item] = random.choice(string.ascii_uppercase)
 
     def retry(self, word, grid: list):
+        found = False
         positions = []
         candidates = []
         for row in range(self.height):
@@ -164,7 +166,6 @@ class WordSearch:
             else:
                 self.place_word(positions, grid)
                 return positions
-                placed = True
             tries += 1
             if tries == 2000:
                 added, positions = self.retry(word, grid)
@@ -173,12 +174,12 @@ class WordSearch:
                 return positions
             continue
 
-    def predict_width_height(self, words, ratio=1.3):
+    def predict_width_height(self, words, ratio=2.3):
         words = clean_words(words)
         if len(words) > 0:
             len_longest = len(words[0])
             letters = sum(list(map(len, words)))
-            total = letters * 2.3
+            total = letters * ratio
             dimension = round(total**0.5)
             if dimension < len_longest:
                 dimension = len_longest
@@ -250,7 +251,7 @@ class WordSearch:
             self.fill(grid)
         self.grid = grid
         placed = [
-            word for word in self.all_positions 
+            word for word in self.all_positions
             if len(self.all_positions[word]) >= 1
         ]
         not_placed = [
@@ -337,11 +338,15 @@ class WordSearch:
         ws["B1"].alignment = Alignment(horizontal="center", vertical="center")
         cell: Cell
         for row in ws.iter_rows(
-            min_row=3, max_row=self.width + 2, min_col=2, max_col=self.width + 1
+            min_row=3,
+            max_row=self.width + 2,
+            min_col=2,
+            max_col=self.width + 1
         ):
             for cell in row:
                 cell.font = Font(size=fontsize, name=fontname, bold=True)
-                cell.alignment = Alignment(horizontal="center", vertical="center")
+                cell.alignment = Alignment(horizontal="center",
+              vertical="center")
                 side = Side(border_style="thin", color="FF000000")
                 cell.border = Border(left=side, right=side, top=side, bottom=side)
                 cell.fill = PatternFill(
@@ -368,7 +373,7 @@ class WordSearch:
         wordsearch["Words"] = list(self.all_positions.keys())
         with open(filename, "w", encoding="utf-8") as file:
             json.dump(wordsearch, file)
-
+    """
     def export_docx(self, filename, title="Wordsearch", answers=False):
         doc = Document()
         doc.add_heading(title, 0)
@@ -377,7 +382,7 @@ class WordSearch:
             for col in self.grid[0]:
                 table.rows[row].cells[col].text = col
         doc.save(filename)
-
+    """
     def export_html(self, filename):
         pass
 

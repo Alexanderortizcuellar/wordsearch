@@ -14,7 +14,7 @@ def find_positions(puzzle:str, word:str):
                     if grid[row][column] == word[0]:
                         positions.append((row, column,grid[row][column]))
     return grid,positions,height,width
-        
+
 
 directions = [(1,0), (0,1), (1,1), (-1,0),(0,-1),(-1,-1)]
 

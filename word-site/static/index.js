@@ -1,15 +1,17 @@
-function tabManager(evt, tab) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("settings");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tab-btn");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-    tablinks[i].style.backgroundColor = "rgba(76, 175, 80, 1.0)"
-  }
-  document.getElementById(tab).style.display = "block";
-  evt.currentTarget.className += " active";
-  evt.currentTarget.style.backgroundColor = "rgba(76, 175, 80, 0.8)"
-}
+let table = document.querySelector("table")
+
+let tds = document.querySelectorAll("table td")
+tds.forEach((td)=>{
+	td.setAttribute("draggable", "true")
+})
+
+
+tds.forEach((td)=>{
+td.addEventListener("dragstart", (e)=>{
+	e.preventDefault()
+	let elem = document.createElement("div");
+	elem.classList.add("line")
+	td.appendChild(elem)
+	td.classList.add("selected")
+	})
+})
