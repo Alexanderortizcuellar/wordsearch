@@ -1,5 +1,16 @@
-import random
+def find_grid(name:str):
+    with open("wordsearch.txt") as file:
+        grid = file.readlines()
+        grid = list(map(lambda x:x.replace("\n",""), grid))
+        grid = list(map(lambda x:x.replace(" ",""), grid))
+    return grid
 
+
+def load_words():
+    with open("fruits.csv") as file:
+        words = [x.strip() for x in file.readlines() if x != "\n"]
+        words = list(map(lambda x:x.replace("\n",""), words))
+    return words
 
 def find_positions(puzzle:str, word:str):
     with open(puzzle) as file:
@@ -39,3 +50,6 @@ def find_word(word):
                 break
             continue
     
+words = load_words()
+for word in words:
+    find_word(word)

@@ -19,6 +19,7 @@ from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table
 from rich.console import Console
 from unidecode import unidecode
 
+
 time.time()
 
 
@@ -130,7 +131,6 @@ class WordSearch:
                     self.place_word(positions, grid)
                     found = True
                     return (True, positions)
-                    break
                 if found is True:
                     break
                 continue
@@ -191,7 +191,7 @@ class WordSearch:
         for pos in word_position:
             self.grid[pos[0]][pos[1]] = f"[bold {color}]{pos[2]}[/bold {color}]"
 
-    def pos_to_style(self, pos: list):
+    def pos_to_style(self, pos: list|tuple):
         color = random.choice(list_colors)
         pos = tuple(tuple(reversed(p[0:2])) for p in pos)
         if len(pos) > 0:
@@ -276,7 +276,7 @@ class WordSearch:
 
     def export_text(self, filename: str):
         with open(filename, "w") as file:
-            for row in self.grid:
+            for row in fill(self.grid):
                 file.write(f'{" ".join(row)}\n')
             file.write("________________________________\n")
             for word in self.all_positions.keys():
@@ -285,7 +285,7 @@ class WordSearch:
     def export_csv(self, filename: str, delimiter=",", encoding="UTF-8"):
         with open(filename, "w", newline="", encoding=encoding) as file:
             writer = csv.writer(file, delimiter=delimiter)
-            writer.writerows(self.grid)
+            writer.writerows(fill(self.grid))
             writer.writerow(["" for x in range(self.width)])
             for w in self.all_positions.keys():
                 writer.writerow([w])
@@ -371,7 +371,7 @@ class WordSearch:
         wordsearch["Wordsearch"] = self.grid
         wordsearch["Positions"] = self.all_positions
         wordsearch["Words"] = list(self.all_positions.keys())
-        with open(filename, "w", encoding="utf-8") as file:
+        with open(str(filename), mode="w", encoding="utf-8") as file:
             json.dump(wordsearch, file)
     """
     def export_docx(self, filename, title="Wordsearch", answers=False):

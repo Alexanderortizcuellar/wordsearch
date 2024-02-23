@@ -1,4 +1,4 @@
-from wordsearch import WordSearch
+from wordsearch.wordsearch import WordSearch
 
 words = ["apple", "mango", "grape"]
 ws = WordSearch(words, 10, 10)

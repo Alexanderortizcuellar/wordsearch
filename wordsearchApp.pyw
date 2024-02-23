@@ -14,7 +14,7 @@ import ui_batch
 import ui_export
 import ui_words
 import ui_wordsearch
-from wordsearch import WordSearch
+from wordsearch.wordsearch import WordSearch
 from utilities.utilities import clean_words, fill, remove_asterisks, predict_width_height
 
 
@@ -461,10 +461,11 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
             if file:
                 words = [self.words_list.item(row).text()
                          for row in range(self.words_list.count())]
+                print(words)
                 with open(file, "w") as f:
                     writer = csv.writer(f)
                     for word in words:
-                        writer.writerow([word])
+                            writer.writerow([word])
         else:
             QMessageBox.warning(self, "Wordsearch words", "No words to save!")
 
