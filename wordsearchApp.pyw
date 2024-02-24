@@ -53,10 +53,36 @@ class Solver(QDialog, solver_ui.Ui_Form):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
+        self.buttonBox.accepted.connect(self.solve)
+        self.buttonBox.rejected.connect(self.reject)
+        self.split_button.clicked.connect(self.split_words)
+        self.rows_input.valueChanged.connect(self.split_grid)
     
-
+    def split_words(self):
+        msg, ok = QInputDialog.getText(self, "Split Words", "Enter split caracter")
+        if ok:
+            words = self.words_input.toPlainText().split(msg)
+            self.words_input.clear()
+            for word in words:
+                self.words_input.insertPlainText(word + "\n")
     
+    def split_grid(self):
+        value = self.rows_input.value()
+        text = self.grid_input.toPlainText()
+        text = text.replace(" ", "")
+        rows = [text[i:i+value] for i in range(0, len(text), value)]
+        self.grid_input.clear()
+        for row in rows:
+            self.grid_input.insertPlainText(row + "\n")
 
+    def  solve(self):
+        grid = solver.extract_grid(self.grid_input.toPlainText())
+        words = solver.extract_words(self.words_input.toPlainText())
+        words = clean_words(words)
+        print(words)
+        for word in words:
+            solver.find_word(word, grid)
+    
 
 
 class BatchWords(QDialog, ui_batch.Ui_Dialog):
@@ -434,7 +460,7 @@ class Window(QMainWindow, wordsearch_ui.Ui_MainWindow):
         dlg = ImportWords(self)
         dlg.exec_()
 
-    def get_words(self, listwidget: QListWidget) -> list[str]:
+    def get_words(self, listwidget: QListWidget) -> list[str]|None:
         if listwidget.count() > 0:
             words = [listwidget.item(row).text()
                      for row in range(listwidget.count())]

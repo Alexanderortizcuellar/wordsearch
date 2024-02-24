@@ -31,10 +31,10 @@ def find_positions(grid: list[str], word:str):
         for column in range(width):
             if grid[row][column] == word[0]:
                 positions.append((row, column,grid[row][column]))
-    return grid,positions,height,width
+    return grid, positions, height, width
 
 
-directions = [(1,0), (0,1), (1,1), (-1,0),(0,-1),(-1,-1)]
+directions = [(1,0), (0,1), (1,1), (-1,0),(0,-1),(-1,-1), (1,-1), (-1,1)]
 
 def find_word(word, grid):
     grid,positions,height,width = find_positions(grid, word)
