@@ -999,6 +999,7 @@
      <addaction name="actionFrom_Excel"/>
      <addaction name="actionFrom_texto"/>
      <addaction name="actionFrom_Clip_board"/>
+     <addaction name="action_Open_Editor"/>
     </widget>
     <widget class="QMenu" name="menu_Share">
      <property name="title">
@@ -1119,6 +1120,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="action_Open_Editor">
+   <property name="text">
+    <string>&amp;Open Editor</string>
    </property>
   </action>
  </widget>

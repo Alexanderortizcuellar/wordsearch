@@ -13,9 +13,11 @@ from qdarkgraystyle import load_stylesheet
 import ui_batch
 import ui_export
 import ui_words
-import ui_wordsearch
+import wordsearch_ui
 from wordsearch.wordsearch import WordSearch
 from utilities.utilities import clean_words, fill, remove_asterisks, predict_width_height
+from utilities import solver
+import solver_ui
 
 
 class WordSearchModel(QAbstractTableModel):
@@ -43,6 +45,18 @@ class WordSearchModel(QAbstractTableModel):
         if role == Qt.TextAlignmentRole:
             value = self.case(self._data[index.row()][index.column()])
             return Qt.AlignVCenter + Qt.AlignHCenter
+
+
+
+class Solver(QDialog, solver_ui.Ui_Form):
+    def __init__(self, parent, *args, **kwargs):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+    
+
+    
+
 
 
 class BatchWords(QDialog, ui_batch.Ui_Dialog):
@@ -252,11 +266,12 @@ class Export(QDialog, ui_export.Ui_Dialog):
             msg = QMessageBox.warning(self, "Save Wordsearch", str(e))
 
 
-class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
+class Window(QMainWindow, wordsearch_ui.Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__()
         self.setupUi(self)
         self.action_Export.triggered.connect(self.export)
+        self.action_Open_Editor.triggered.connect(self.open_solver)
         self.title_font_btn.clicked.connect(self.set_title_font)
         self.letters_font_btn.clicked.connect(self.set_letters_font)
         self.title_text_color_btn.clicked.connect(self.set_title_color)
@@ -357,6 +372,10 @@ class Window(QMainWindow, ui_wordsearch.Ui_MainWindow):
         fontdlg.exec_()
         font = fontdlg.selectedFont()
         print(font.family(), font.pointSize(), font.weight())
+    
+    def open_solver(self):
+        dlg = Solver(self)
+        dlg.exec_()
 
     def set_letters_font(self):
         font, ok = QFontDialog(self).getFont()
