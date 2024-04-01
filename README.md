@@ -4,7 +4,10 @@
 To generate and solve a word search puzzle, follow these steps:
 
 1. clone this repo
-   ```bash git clone  https://github.com/Alexanderortizcuellar/chess.git ```
+
+   ``` git clone  https://github.com/Alexanderortizcuellar/wordsearch.git ```
+
+2. ```cd wordsearch```
    
 3. Run the program:
 
