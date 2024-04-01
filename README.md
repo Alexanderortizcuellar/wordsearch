@@ -16,12 +16,5 @@ To generate and solve a word search puzzle, follow these steps:
 6. Run the program:
 
     ```bash
-    python wordsearch.py
+    python wordsearchApp.pyw
     ```
-
-7. Follow the on-screen instructions to generate and solve the puzzle.
-
-## Example
-
-```bash
-python wordsearch.py
