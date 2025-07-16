@@ -39,7 +39,7 @@ A desktop word search game built with Python and PyQt5. This application allows 
 
 *   `app.py`: The main application file containing the PyQt5 UI and game logic.
 *   `generator.py`: Contains the `WordSearchGenerator` class for creating the word search puzzles.
-*   `manager.py`: (Purpose to be determined, likely for managing game state or data).
+*   `manager.py`: Program to create more wordsearches, add and edit topics and words.
 *   `wordsearch.db`: The SQLite database that stores the topics and words for the puzzles.
 *   `style.qss` and `managerstyle.qss`: Stylesheets for the application's UI.
 *   `topic_card.py`: A custom widget for displaying the topic cards in the menu.
