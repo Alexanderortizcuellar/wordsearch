@@ -1,0 +1,22 @@
+QListWidget {
+    border: none;
+    background-color: transparent;
+}
+
+    /* Style each item */
+QListWidget::item {         /* Top/Bottom 8px, Left/Right 12px */
+    margin: 2px 0;               /* Small vertical gap between items */
+    color: #000000;              /* Dark gray text for readability */
+    font: 16px \"Arial\";        /* A clear, legible font and size */
+}
+
+    /* Hover effect */
+QListWidget::item:hover {
+    background-color: rgba(200, 200, 200, 0.3);
+}
+
+    /* Selected/found effect (if you .setCurrentRow or select it) */
+QListWidget::item:selected {
+    background-color: rgba(100, 150, 255, 0.3);
+    color: #000000;              /* Pure black text when selected */
+}
